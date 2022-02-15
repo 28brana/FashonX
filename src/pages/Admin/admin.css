@@ -1,0 +1,11 @@
+
+
+.admin-page{
+    /* border:2px solid red; */
+    display: flex;
+}
+
+.admin-container{
+    flex: 1;
+    /* border:2px solid red; */
+}

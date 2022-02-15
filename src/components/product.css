@@ -1,0 +1,29 @@
+.product{
+    padding: 1em 0em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+/* 
+.productBox-content{
+    padding: 0.4em 0;
+    background-color: white;
+    display: flex;
+   
+    bottom: 0;
+    width: 100%;
+    
+    justify-content: space-around;
+    
+}
+
+.productBox-content > *{
+    margin: 0 15px;
+    padding: 1px 0;
+    flex: 1;
+    text-align: center;
+    border:2px solid red;
+    background-color: rgba(255, 0, 0, 0.397);
+} */

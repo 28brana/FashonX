@@ -1,0 +1,17 @@
+.admin-nav{
+    border-bottom:1px solid rgba(0, 0, 0, 0.308);
+    display: flex;
+    padding: 1em 0;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1em;
+}
+/* 
+.admin-nav > *{
+    width: 10px;
+    height: 10px;
+} */
+
+.admin-nav-icon{
+    font-size: 1.8rem !important;
+}

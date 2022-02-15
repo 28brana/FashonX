@@ -1,0 +1,36 @@
+.register-container{
+    background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+.register-form{
+    background-color: white;
+    border-radius: 5px;
+    /* border:2px solid red; */
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+.register-form input{
+    padding: 1em;
+    font-size: 1rem;
+    margin: 1em ;
+}
+.input-error{
+    font-size: 0.9rem;
+    margin: 0 1.1em;
+    /* border:2px solid red; */
+    color:red;
+    margin-top: -10px;
+
+}
+.register-form input:focus{
+    outline: none;
+}
+.register-submit{
+  margin: 1em !important;
+}
+

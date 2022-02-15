@@ -1,0 +1,19 @@
+.filter,.sort{
+    display: flex;
+    align-items: center;
+    /* min-height:  */
+}
+.filter span,.sort span{
+    margin: 0 0.5em;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.select-box{
+    margin: 0 0.5em;
+    transform: scale(0.8);
+}
+.product-operations-container{
+    display: flex;
+    padding: 1em;
+    justify-content: space-between;
+}

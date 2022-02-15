@@ -1,0 +1,18 @@
+.productlist-img{
+    display: flex;
+    align-items: center;
+
+}
+
+.productlist-img img{
+    width: 70px;
+}
+
+.action{
+    display: flex;
+    gap: 1em;
+}
+
+.productlist-title{
+    margin: 1em;
+}

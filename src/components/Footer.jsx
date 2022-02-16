@@ -5,11 +5,12 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CallIcon from '@mui/icons-material/Call';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Link } from 'react-router-dom';
 const Footer=()=>{
     return (
         <footer>
         <div className="footer-left">
-            <h1>Fashon.</h1>
+            <h1>FashonX</h1>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquid et porro quisquam amet soluta velit, ratione dolores commodi magni temporibus cumque aliquam nihil possimus dignissimos obcaecati repudiandae voluptates alias. Dolore, commodi! Omnis, nemo quae ea iure, libero </p>
             <div>
                 <FacebookIcon color="primary"  className='footer-icon'/>
@@ -21,18 +22,18 @@ const Footer=()=>{
             <h1>Useful link</h1>
             <div className='footer-links'>
                <div>
-                <a href="/">Home</a>
-                <a href='/cart'>Cart</a>
-                <a href='/product'>Product</a>
-                <a href='/term'>Term</a>
-                <a href="/login">login</a>
+                <Link to="/">Home</Link>
+                <Link to='/cart'>Cart</Link>
+                <Link to='/products'>Product</Link>
+                <Link to='/term'>Term</Link>
+                <Link to="/login">login</Link>
                </div>
                <div>
-                <a href="/">Home</a>
-                <a href='/cart'>Cart</a>
-                <a href='/product'>Product</a>
-                <a href='/term'>Term</a>
-                <a href="/login">login</a>
+                <Link to="/">Home</Link>
+                <Link to='/cart'>Cart</Link>
+                <Link to='/product'>Product</Link>
+                <Link to='/term'>Term</Link>
+                <Link to="/login">login</Link>
                </div>
               
             </div>

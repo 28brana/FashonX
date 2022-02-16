@@ -82,12 +82,11 @@ const AdminProductList = () => {
     }
   }, [])
 
-  console.log(getData)
 
 
   return (
     <div style={{ height: '100vh', width: '100%' }} className="admin-product-list">
-     <h1 className='productlist-title'>Product</h1>
+     <h1 className='productlist-title'>Product 🛍️</h1>
       <DataGrid
         rows={getData}
         columns={columns}

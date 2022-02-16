@@ -18,7 +18,7 @@ const Products=(props)=>{
   useEffect(()=>{
     const getProducts=async ()=>{
       try{
-        const res=props.cat ? await axios.get(`http://localhost:5000/api/products?category=${props.cat}`):axios.get('http://localhost:5000/api/products/');
+        const res=props.cat ? await axios.get(`http://localhost:5000/api/products?category=${props.cat}`): await axios.get('http://localhost:5000/api/products/');
         setData(res.data);
       }catch(err){
         console.log(err)
@@ -69,6 +69,7 @@ const Products=(props)=>{
     <div className="product">
       {filterProducts.map((item)=>{
         return <ProductBox title={item.title} key={item._id} price={item.price} src={item.img} id={item._id}
+        product={item}
         />
       })}
     </div>
@@ -80,6 +81,7 @@ const Products=(props)=>{
 const ProductList=()=>{
   const Location=useLocation();
   const cat=Location.pathname.split('/')[2];
+ 
   const [getState,setState]=useState({
     color:"",
     size:"",
@@ -102,7 +104,7 @@ const ProductList=()=>{
         <Navbar/>
         <Announcement/>
         <div className="productlist-container">
-            <h1>{cat}</h1>
+            <h1 style={{padding:'1em'}} >{cat} clothes 🛍️</h1>
             <div className="product-operations-container">
                 <div className="filter">
                     <span>Filter Products: </span>
@@ -110,9 +112,11 @@ const ProductList=()=>{
                     <FormControl fullWidth className="select-box" >
                         <InputLabel id="color">color</InputLabel>
                         <Select name="color" labelId="color" value={getState.color} label="color" onChange={handleChange}>
-                          <MenuItem value={"Red"}>Red</MenuItem>
-                          <MenuItem value={"Black"}>Black</MenuItem>
-                          <MenuItem value={"Yellow"}>Yellow</MenuItem>
+                          <MenuItem value={"red"}>Red</MenuItem>
+                          <MenuItem value={"black"}>Black</MenuItem>
+                          <MenuItem value={"yellow"}>Yellow</MenuItem>
+                          <MenuItem value={"green"}>Green</MenuItem>
+                          <MenuItem value={"orange"}>Orange</MenuItem>
                         </Select>
                     </FormControl>
                     <FormControl fullWidth className="select-box">
@@ -123,6 +127,7 @@ const ProductList=()=>{
                             <MenuItem value={"M"}>M</MenuItem>
                             <MenuItem value={"L"}>L</MenuItem>
                             <MenuItem value={"XL"}>XL</MenuItem>
+                            <MenuItem value={"XXL"}>XXL</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
@@ -139,11 +144,7 @@ const ProductList=()=>{
                     </FormControl>
                 </div>
             </div>
-            {/* <div className="product">
-            <ProductBox title="White-shirt" price="200" src={pic1}/>
-            
-
-            </div> */}
+           
             <Products cat={cat} filter={{color:getState.color,size:getState.size}} sort={getState.sort}/>
         </div>
         <Footer/>

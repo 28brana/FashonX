@@ -10,7 +10,7 @@ const Products=()=>{
         try{
           const res=await axios.get('http://localhost:5000/api/products/');
           // console.log(res);
-          setData(res.data);
+          setData(res.data.slice(0,6));
         }catch(err){
           console.log(err)
         }
@@ -23,7 +23,7 @@ const Products=()=>{
     return (
       <div className="product">
         {getData.map((item)=>{
-          return <ProductBox title={item.title} key={item._id} price={item.price} src={item.img} id={item._id}/>
+          return <ProductBox title={item.title} key={item._id} price={item.price} src={item.img} id={item._id} product={item}/>
         })}
       </div>
     )

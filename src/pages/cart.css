@@ -1,5 +1,6 @@
 .cart-list-container{
     display: flex;
+    flex-wrap: wrap;
     /* border:2px solid red; */
     gap: 1em;
     padding: 0 5em;
@@ -11,7 +12,14 @@
     flex:1;
 }
 
-
+.remove-cart{
+    cursor: pointer;
+    padding: 1em;
+    
+    background-color: black;
+    font-weight: bold;
+    color: white;
+}
 
 .cartBox div > span{
     font-weight: bold;
@@ -22,6 +30,7 @@
 .cartBox{
     margin: 2em 0;
     display: flex;
+    flex-wrap: wrap;
     border-bottom:1px solid rgba(5, 3, 3, 0.452);
     gap: 3em;
 }
@@ -35,6 +44,7 @@
 
 }
 .cartBox-img{
+    min-width: 200px;
     max-width: 300px;
 }
 
@@ -50,7 +60,9 @@
     gap: 0.5em;
     
 }
-
+.cart-product-count span{
+    cursor: pointer;
+}
 .cart-summery{
     border-radius: 10px;
     border:1px solid rgba(0, 0, 0, 0.452);

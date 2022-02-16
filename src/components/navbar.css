@@ -4,8 +4,6 @@
     align-items: center;
  }
 
-
-
 .navbar li{
     margin: 0.5em 1.4em;
     list-style: none;
@@ -16,14 +14,15 @@
     gap:1.5em;
 }
 .navbar-search{
-    border-radius: 5px;
+    justify-content: center;
     display: flex;
-    padding: 2px;
-    border:1px solid rgba(5, 4, 4, 0.473);
+    align-items: center;
+    /* padding: 2px; */
 }
 .navbar-search input{
     border:none;
 }
+
 
 .navbar-search input:focus{
     outline: none;

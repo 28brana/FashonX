@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import {userRequest} from '../requestMethods'
 import { useState } from 'react';
 import './adminaddproduct.css';
-
+import Toast from './Toast'
 import {
     getStorage,
     ref,
@@ -14,8 +14,8 @@ import {
 import app from '../firebase.js'
 
 const AdminAddProduct = () => {
-     
-
+     const [disable,setDisable]=useState(false);
+    const [get,set]=useState(0);
     const [product,setProduct]=useState({
         title:'',
         desc:'',
@@ -42,13 +42,18 @@ const AdminAddProduct = () => {
 
     const addProductRequest=async (data)=>{
       try{
-        const res= await userRequest.post('/products',data);
-        console.log(res);
+        await userRequest.post('/products',data);
+        set(1);
+        
        
       }catch(err){
         setError(2)
         console.log(err);
       }
+      setDisable(false);
+
+      setTimeout(()=>set(0),1000);
+
     }
    
     const Error=()=>{
@@ -66,7 +71,7 @@ const AdminAddProduct = () => {
 
         return ;
       }
-
+      setDisable(true);
 
         const fileName = new Date().getTime() + file.name;
         const storage = getStorage(app);
@@ -91,6 +96,7 @@ const AdminAddProduct = () => {
             },
             (error) => {
               // Handle unsuccessful uploads
+              setDisable(false);
               setError(2);
             },
             () => {
@@ -107,7 +113,6 @@ const AdminAddProduct = () => {
     }
 
 
-    console.log(product)
     return (
         <div className="admin-add-product">
             <div className="add-product-container">
@@ -143,11 +148,14 @@ const AdminAddProduct = () => {
                   getError!==0  && <Error/>
                 }
                 <div className="add-product-item">
-                  <Button onClick={handleSubmit} variant="contained">Contained</Button>
+                  <Button disabled={disable} onClick={handleSubmit} variant="contained">Contained</Button>
                 </div>
                 
                 
             </div>
+            {
+              get===1 && <Toast msg='Product is Added'/>
+            }
         </div>
     )
 }

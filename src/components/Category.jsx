@@ -1,6 +1,6 @@
-import pic1 from './demo/pic4.jpg'
-import pic2 from './demo/pic5.jpg'
-import pic3 from './demo/pic6.jpg'
+import pic1 from './demo/pic1.jpg'
+import pic2 from './demo/pic2.jpg'
+import pic3 from './demo/pic3.jpg'
 import './category.css'
 import { Link } from 'react-router-dom';
 
@@ -8,17 +8,17 @@ const data=[
     { 
         id:1,
         src:pic1,
-        title:"Women"
+        title:"cultural"
     },
     { 
         id:2,
         src:pic2,
-        title:"Men"
+        title:"mens"
     },
     { 
         id:3,
         src:pic3,
-        title:"Summer"
+        title:"kids"
     },
     
 ]
@@ -26,15 +26,18 @@ const data=[
 
 const CategoryBox=(props)=>{
     return(
-        <Link style={{textDecoration:'none'}} to={`products/${props.title}`}>
-            <div className="categoryBox">
-                <img src={props.src} alt="Category Pic" className="categoryBox-img" />
-                <div className="categoryBox-content">
-                    <h1>{props.title}</h1>
+        
+        <div className="categoryBox">
+            <img src={props.src}  loading="lazy" alt="Category Pic" className="categoryBox-img" />
+            <div className="categoryBox-content">
+                <h1>{props.title}</h1>
+                <Link to={`/products/${props.title}`}>
+
                     <button>SHOP NOW</button>
-                </div>
+                </Link>
             </div>
-        </Link>
+        </div>
+        
        
     )
 }

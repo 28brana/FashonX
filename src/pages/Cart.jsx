@@ -1,9 +1,11 @@
 import NavBar from '../components/Navbar'
 import  Announcement  from '../components/Announcement';
 import StripeCheckOut from 'react-stripe-checkout'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { userRequest } from '../requestMethods';
 import './cart.css';
+import { counterProduct, removeItem } from '../redux/reducers/cartReducer';
+import { useState } from 'react';
 
 const Key=process.env.REACT_APP_STRIPE_KEY ;
 
@@ -13,7 +15,8 @@ const ColorBox=({color})=>{
         height:'20px',
         backgroundColor:color,
         borderRadius:'50%',
-        display:'inline-block'
+        display:'inline-block',
+        boxShadow:'#000000a6 0px 0px 3px 1px'
     }
     return (
         <div style={colorStyle}></div>
@@ -21,7 +24,26 @@ const ColorBox=({color})=>{
 }
 const CartBox=(props)=>{
     props=props.data
-    // console.log(props)
+    const dispatch=useDispatch();
+
+   
+
+    const [count,setCount]=useState(props.quantity);
+
+    const handleCount=(type)=>{
+        if(type==='ADD'){
+            setCount(count+1);
+            dispatch(counterProduct({...props,type}));
+        }else if(count>1){
+            setCount(count-1);
+            dispatch(counterProduct({...props,type}));
+        }
+
+    }
+    const handleRemove=()=>{
+        console.log("REmoved");
+        dispatch(removeItem({id:props._id}));
+    }
     return (
         <div className="cartBox">
             <div className="cartBox-img">
@@ -35,11 +57,12 @@ const CartBox=(props)=>{
             </div>    
             <div className="cartBox-right">
                     <div className='cart-product-count'>
-                        <span>-</span>
-                        <div>{props.quantity}</div>
-                        <span>+</span>
+                        <span onClick={()=>handleCount('SUB')} >-</span>
+                        <div>{count}</div>
+                        <span onClick={()=>handleCount('ADD')}>+</span>
                     </div>
                     <div>Rs {props.price * props.quantity}</div>
+                    <button onClick={handleRemove} className='remove-cart'>Remove</button>
             </div>
         </div>
     )
@@ -47,17 +70,17 @@ const CartBox=(props)=>{
 
 const Cart=()=>{
     const cart=useSelector(state=>state.cart);
-    const productList=cart.products.map((item)=>{
+    const user=useSelector(state=>state.user);
+    
+    console.log(user);
+    cart.products.map((item)=>{
         return {
             "productId":item._id,
             "quantity":item.quantity
         }
     })
 
-    console.log(productList)
     const onToken=(token)=>{
-
-        console.log(token.card.address_line1)
         const productList=cart.products.map((item)=>{
             return {
                 "productId":item._id,
@@ -65,11 +88,12 @@ const Cart=()=>{
             }
         })
         const data={
-            "userId":"61fcad96024f28c825886273",
+            "userId":user.currentUser._id,
             "products":productList,
             "amount":cart.total,
             "address":token.card.address_line1
         }
+        console.log(data)
         const makeOrder=async()=>{
             const res= await userRequest.post('/orders/',data) 
             console.log(res)
@@ -77,12 +101,13 @@ const Cart=()=>{
         makeOrder();
     }
 
+    
     return (
         <>
             <NavBar/>
             <Announcement/>
             <div className="cart-container">
-                <h1>Your Bag</h1>
+                <h1 style={{padding:'1em'}}>Your Bag 🛒 </h1>
                 <div className="cart-list-container">
                     <div className="cart-list">
                        {cart.products.map((item)=>{
@@ -112,12 +137,13 @@ const Cart=()=>{
                             billingAddress
                             shippingAddress={true}
                             description={`Your Total is ${cart.total}`}
-                            amount={cart.total}
+                            amount={cart.total*100}
                             token={onToken}
                             stripeKey={Key}
                           
+                          
                         >
-                        <button className='order-btn' >CHECKOUT NOW</button>
+                        <button disabled={!user.currentUser} className='order-btn' >CHECKOUT NOW</button>
                         </StripeCheckOut>
                         
                     </div>

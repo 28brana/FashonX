@@ -2,6 +2,7 @@ import { useEffect,useState } from "react";
 import { useLocation } from "react-router-dom"
 import { userRequest } from "../requestMethods";
 import Button from '@mui/material/Button';
+import Toast from './Toast'
 
 const ColorBox=({color})=>{
     const colorStyle={
@@ -19,7 +20,8 @@ const ColorBox=({color})=>{
 
 
 const AdminUpdateProduct=()=>{
-
+    const [disable,setDisable]=useState(false);
+    const [get,set]=useState(0);
     // New Product 
     const [product,setProduct]=useState({
         title:'',
@@ -80,7 +82,6 @@ const AdminUpdateProduct=()=>{
 
     },[id])
 
-    // console.log(getProductDetail)
 // Error Handling
     const Error=()=>{
         let msg='Something went wrong';
@@ -92,6 +93,7 @@ const AdminUpdateProduct=()=>{
       }
 
     const handleSubmit=()=>{
+        setDisable(true);
         if(product.title === '' || product.desc ==='' || product.color ==='' || !product.price  || product.size === ''  || getCategory.length === 0 ){
             setError(1);
     
@@ -101,13 +103,17 @@ const AdminUpdateProduct=()=>{
         // console.log(data)
         const updateRequest= async()=>{
             try{
-                const res=await userRequest.put(`/products/${id}`,data);
-                console.log(res);
+                await userRequest.put(`/products/${id}`,data);
+                set(1);
                 setError(0);
+                setDisable(false); 
             }catch(err){
+                setDisable(false); 
                 console.log(err);
                 setError(2);
             }
+            setTimeout(()=>set(0),1000);
+
         }
         updateRequest();
     }
@@ -154,8 +160,12 @@ const AdminUpdateProduct=()=>{
                   getError!==0  && <Error/>
                 }
                 <div className="add-product-item">
-                  <Button onClick={handleSubmit} variant="contained">Contained</Button>
+                  <Button disabled={disable} onClick={handleSubmit} variant="contained">Contained</Button>
                 </div>
+
+                {
+                get===1 && <Toast msg='Product is Updated'/>
+                }
                 
                 
             </div>

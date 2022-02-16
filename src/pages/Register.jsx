@@ -7,8 +7,6 @@ import { register } from '../redux/reducers/apiCalls';
 import { useNavigate } from 'react-router-dom';
 import './register.css'
 
-
-
 function validateEmail(email) 
     {
         var re = /\S+@\S+\.\S+/;

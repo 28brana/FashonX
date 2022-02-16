@@ -1,0 +1,14 @@
+.toast{
+    position: fixed;
+    right: -100px;
+   
+    top:10px;
+    border-radius: 2px;
+    z-index: 999999 !important;
+    visibility: hidden;
+    transition: all 1s ease-in-out;
+}
+.toast-show{
+    right: 20px;
+    visibility: visible;
+}

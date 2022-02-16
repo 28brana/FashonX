@@ -6,20 +6,52 @@ import { Link } from 'react-router-dom';
 import './navbar.css';
 import { useSelector } from 'react-redux';
 
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+
+const data=[
+    'mens',
+    'womens',
+    'kids',
+    'dress',
+    'summers',
+    'winters',
+    'cultural',
+    'girls',
+    'party',
+    'lehenga'
+
+]
 const Navbar=()=>{
     const {quantity}=useSelector(state=>state.cart);
     const user=useSelector(state=>state.user);
+    const [cat,setCat]=useState('');
+    const logOut=()=>{
+        localStorage.clear();
+    }
+
     return (
         <div className="navbar-container">
             <ul className="navbar">
                 <li className="navbar-left"> 
                     <div className="language">EN</div>
                     <div  className="navbar-search">
-                        <input type="search" name="" id="" placeholder="search" />
-                        <SearchIcon/>
+                        <Autocomplete
+                       style={{transform:'scale(0.8)'}}
+                            disablePortal
+                            onChange={(e,value)=>{(value===null)?setCat(''):setCat(value)}}
+                            id="combo-box-demo"
+                            options={data}
+                            sx={{ width: 300 }}
+                            renderInput={(params) => <TextField  {...params} label="Search categories" />}
+                            />
+                        <Link to={'/products/'+cat}>
+                            <SearchIcon/> 
+                        </Link>
                     </div>
                 </li>
-                <li className="logo">Fashon.</li>
+                <li className="logo">FashonX</li>
                 <li className="navbar-right">
                     
                     {
@@ -30,9 +62,10 @@ const Navbar=()=>{
                         <div>Register</div> 
                     </Link>
                     {
-                        user.currentUser ?   <Link to="/login">
-                        <div>Log Out</div>
-                        </Link> :
+                        user.currentUser ?  
+                        
+                        <div style={{cursor:'pointer'}} onClick={logOut}>Log Out</div>
+                         :
                         <Link to="/login">
                         <div>Sign in</div>
                         </Link>

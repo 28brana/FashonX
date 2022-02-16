@@ -4,12 +4,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
 import { Link } from 'react-router-dom';
 import './navbar.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
+import { logout } from '../redux/reducers/userReducer';
 const data=[
     'mens',
     'womens',
@@ -26,9 +26,11 @@ const data=[
 const Navbar=()=>{
     const {quantity}=useSelector(state=>state.cart);
     const user=useSelector(state=>state.user);
+    const dispatch=useDispatch();
+    
     const [cat,setCat]=useState('');
     const logOut=()=>{
-        localStorage.clear();
+        dispatch(logout());
     }
 
     return (

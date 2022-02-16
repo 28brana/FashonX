@@ -8,7 +8,7 @@ import ProductBox from "../components/ProductBox";
 import Footer from "../components/Footer";
 import {useEffect, useState} from 'react';
 import { useLocation } from "react-router-dom";
-import axios from "axios";
+import { publicRequest } from "../requestMethods";
 import './productlist.css';
 
 
@@ -18,7 +18,7 @@ const Products=(props)=>{
   useEffect(()=>{
     const getProducts=async ()=>{
       try{
-        const res=props.cat ? await axios.get(`http://localhost:5000/api/products?category=${props.cat}`): await axios.get('http://localhost:5000/api/products/');
+        const res=props.cat ? await publicRequest.get(`/products?category=${props.cat}`): await publicRequest.get('/products/');
         setData(res.data);
       }catch(err){
         console.log(err)

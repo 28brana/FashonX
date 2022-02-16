@@ -61,7 +61,7 @@ const ProductDetail=()=>{
             </div>
             <div className="product-detail-right">
                 <h2>{product.title}</h2>
-                <p ><pre style={{whiteSpace:'break-spaces'}}>{product.desc}</pre></p>
+                <pre style={{whiteSpace:'break-spaces'}}>{product.desc}</pre>
                 <span>Rs {product.price}</span>
                 <div className="product-detail-options">
                     <div className="product-detail-color">

@@ -1,14 +1,14 @@
 
 import ProductBox from './ProductBox';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './product.css';
+import { publicRequest} from '../requestMethods'
 const Products=()=>{
     const [getData,setData]=useState([]);
     useEffect(()=>{
       const getProducts=async ()=>{
         try{
-          const res=await axios.get('http://localhost:5000/api/products/');
+          const res=await publicRequest.get('/products/');
           // console.log(res);
           setData(res.data.slice(0,6));
         }catch(err){

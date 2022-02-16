@@ -25,12 +25,7 @@ const HomeBox=({title,data,color,bg})=>{
 
 const AdminHome =()=>{
     const [userStats, setUserStats] = useState([]);
-    const [getData,setData]=useState({
-        revenu:0,
-        users:0,
-        products:0
-
-    });
+ 
 
     const [getRevenu,setRevenu]=useState(0);
     const [getUsers,setUsers]=useState(0);

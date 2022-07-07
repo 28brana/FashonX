@@ -17,3 +17,17 @@
     padding: 1em;
     justify-content: space-between;
 }
+.product{
+    padding: 1em 0em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+#clear-filter{
+    white-space: nowrap;
+    color: teal;
+    font-weight: bolder;
+    cursor: pointer;
+}

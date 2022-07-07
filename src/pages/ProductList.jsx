@@ -98,6 +98,14 @@ const ProductList=()=>{
 
   }
 
+  const handleClear=()=>{
+    setState({
+      color:"",
+      size:"",
+      sort:""
+    })
+  }
+
   // console.log(getState)
     return (
         <div className="productlist">
@@ -105,6 +113,7 @@ const ProductList=()=>{
         <Announcement/>
         <div className="productlist-container">
             <h1 style={{padding:'1em'}} >{cat} clothes 🛍️</h1>
+            
             <div className="product-operations-container">
                 <div className="filter">
                     <span>Filter Products: </span>
@@ -119,6 +128,7 @@ const ProductList=()=>{
                           <MenuItem value={"orange"}>Orange</MenuItem>
                         </Select>
                     </FormControl>
+                    
                     <FormControl fullWidth className="select-box">
                         <InputLabel id="size">size</InputLabel>
                           <Select name="size" labelId="size" value={getState.size} label="size" onChange={handleChange}>
@@ -130,6 +140,7 @@ const ProductList=()=>{
                             <MenuItem value={"XXL"}>XXL</MenuItem>
                         </Select>
                     </FormControl>
+                <div id="clear-filter" onClick={handleClear}>CLEAR ALL</div>
                 </div>
                 <div className="sort">
                     <span>Sort Products</span>

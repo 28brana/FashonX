@@ -1,9 +1,16 @@
 import Avatar from '@mui/material/Avatar';
 import './adminnav.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../redux/reducers/userReducer';
+import { useDispatch } from 'react-redux';
 const AdminNav=()=>{
+    const navigate = useNavigate();
+    const dispatch=useDispatch();
+
     const logOut=()=>{
-        localStorage.clear();
+        dispatch(logout());
+        navigate('/');
+
     }
     return(
         <div className="admin-nav" >

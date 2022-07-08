@@ -1,6 +1,11 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Navbar from '../components/Navbar';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from "@material-ui/core/InputAdornment";
+
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {login} from '../redux/reducers/apiCalls';
@@ -19,7 +24,10 @@ const Animation=()=>{
 }
 
 const Login=()=>{
-    
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => setShowPassword(!showPassword);
+    const handleMouseDownPassword = () => setShowPassword(!showPassword);
+
     const User=useSelector(state=>state.user)
     const navigate=useNavigate();
     
@@ -63,9 +71,6 @@ const Login=()=>{
         
     }
 
-
-   
-    
     return (
         <>
         <Navbar/>
@@ -73,8 +78,21 @@ const Login=()=>{
         <Animation/>
         <div className="login">
                 <TextField error={getError ===1}  helperText={getError === 1 ? "Field is Empty":""} onChange={handleForm} id="username" name='username' label="username" variant="standard" />
-                <TextField error={getError ===2} helperText={getError === 2 ? "Field is Empty":""} onChange={handleForm} id="password" name='password' label="password" variant="standard" />
-              {User.error ? <div id="user-error">SomeThing Went Wrong</div>:""}
+                <TextField type={showPassword ? "text" : "password"} error={getError ===2} helperText={getError === 2 ? "Field is Empty":""} onChange={handleForm} id="password" name='password' label="password" variant="standard"  
+          InputProps={{ 
+                endAdornment: (
+                <InputAdornment position="end">
+                    <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    >
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    </IconButton>
+                </InputAdornment>
+                )
+             }}/>
+              {User.error ? <div id="user-error">Either password is wrong or username !!!</div>:""}
                 <Button onClick={handleLogin}  disabled={User.isFetching} variant="contained">Login</Button>
             </div>
         </div>

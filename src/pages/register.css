@@ -34,3 +34,15 @@
   margin: 1em !important;
 }
 
+#password-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+#show-hidePass{
+    cursor: pointer;
+    right: 26px;
+    position: absolute;
+    top: 31px;
+}
